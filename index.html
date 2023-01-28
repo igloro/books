@@ -3,16 +3,12 @@
   <html lang="en">
   <head>  
    <meta charset="utf-8" />
-
    <link rel="stylesheet" href="https://cdn.rawgit.com/jgthms/minireset.css/master/minireset.css">
-
    <!-- Latest compiled and minified CSS -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
    <link href="css.css" rel="stylesheet">
    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
-   <script src="http://peoplebooks.igloro.info/pub/js/mybooks.js?v=202211051674894823"></script>
-
+   <script src="js.js"></script>
 
 
 
@@ -857,47 +853,6 @@
 </style>		
 
 
-
-<script>
-  $(document).ready(function()
-  {
-
-
-    var timeout; 
-    var thisid;
-
-    $(".book_listview").on("mouseenter", function() {
-
-      thisid = $(this).attr("id");
-      clearTimeout(timeout);
-
-
-      if( ! $(this).hasClass("force_closed") )
-      {
-        timeout = setTimeout(function() {
-
-          $( "#" + thisid ).addClass("hover_active");
-        }, 500);
-      }
-
-
-
-    });
-
-
-    $(document).on("click", ".hover_active, .force_closed", function()
-    {
-      $(this).removeClass("hover_active");
-      $(this).toggleClass("force_closed");
-
-      clearTimeout(timeout);
-    });
-
-
-
-  });
-
-</script>
 
 
 </body>
