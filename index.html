@@ -3,843 +3,544 @@
   <html lang="en">
   <head>  
    <meta charset="utf-8" />
+    <script src="https://unpkg.com/vue@next"></script>
    <link rel="stylesheet" href="https://cdn.rawgit.com/jgthms/minireset.css/master/minireset.css">
    <!-- Latest compiled and minified CSS -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-   <link href="css.css" rel="stylesheet">
+   <link href="css.css?v=0310" rel="stylesheet">
 
 
  </head>
  <body>
    <div class="container" itemscope itemtype="http://schema.org/WebPage">
-     <div class="row margint10">
+     
+    
+    <div class="row margint10">
 
-
-
-      <div class="book_listview" id="bl_27">
-        <div class="thumbnail book_count_many" style='background: repeating-linear-gradient(90deg, #6e6e6e 0%, #b2b2b2 10%, #6e6e6e 20%, #dcdcdc 30%, #898989 40%,  50%, #898989 60%, #dcdcdc 70%, #6e6e6e 80%, #b2b2b2 90%, #6e6e6e 100%); height: 139px'>
-          <div class="caption clearfix" data-place="1" data-rate="10" data-added="2021-09-28">
-
-            <h3><a>Искажающие Реальность</a> Books in cicle 10</h3>
-            <h4 class="clearfix">Михаил Атаманов 2017</h4>
-
-            <div class="rating rating_s_10">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Искажающие Реальность Михаил Атаманов 2017</div>
-        </div>
+    <div id="app">
+      <div class="clearfix" id="sorting">
+        <button @click="sortTitle">Title</button>
+        <button @click="sortRating">Rating</button>
       </div>
 
+      <div v-for="book in books" class="book_listview" :key="book.id" :id="'bl_' + book.id">
+        <div 
+          class="thumbnail"
+          :class="[book.total_books > 1 ? 'book_count_many' : 'book_count_1']" 
+          :style="book.style_background + '; height: ' + book.style_height + 'px'"
+          >
+            <div class="caption clearfix" data-place="1" data-rate="{{ book.rating }}" data-added="{{ book.last_read }}">
 
+            <h3><a>{{ book.title }}</a> <span v-if="book.total_books > 1">Books in cicle {{ book.total_books }}</span></h3>
+            <h4 class="clearfix">{{ book.author }} {{ book.year }}</h4>
 
-      <div class="book_listview" id="bl_1">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #d1d1d1 0%, #b2b2b2 10%, #b2b2b2 20%, #e6e6e6 30%, #d9d9d9 40%,  50%, #d9d9d9 60%, #e6e6e6 70%, #b2b2b2 80%, #b2b2b2 90%, #d1d1d1 100%); height: 133px'>
-          <div class="caption clearfix" data-place="2" data-rate="9" data-added="2020-01-28">
-
-            <h3><a>На западном фронте без перемен</a> </h3>
-            <h4 class="clearfix">Erichas Marija Remarkas 1928</h4>
-
-            <div class="rating rating_s_9">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">На западном фронте без перемен Erichas Marija Remarkas 1928</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_19">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #bebebe 0%, #bebebe 10%, #cfcfcf 20%, #b2b2b2 30%, #dedede 40%,  50%, #dedede 60%, #b2b2b2 70%, #cfcfcf 80%, #bebebe 90%, #bebebe 100%); height: 134px'>
-          <div class="caption clearfix" data-place="3" data-rate="9" data-added="2020-08-08">
-
-            <h3><a>Yellow Line</a> </h3>
-            <h4 class="clearfix">Mikhail Tyrin 2003</h4>
-
-            <div class="rating rating_s_9">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Yellow Line Mikhail Tyrin 2003</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_8">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #b2b2b2 0%, #d1d1d1 10%, #dedede 20%, #898989 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #898989 70%, #dedede 80%, #d1d1d1 90%, #b2b2b2 100%); height: 144px'>
-          <div class="caption clearfix" data-place="4" data-rate="9" data-added="2020-05-25">
-
-            <h3><a>White fang</a> </h3>
-            <h4 class="clearfix">Jack London  1906</h4>
-
-            <div class="rating rating_s_9">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">White fang Jack London  1906</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_38">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #cfcfcf 0%, #898989 10%, #bebebe 20%, #dedede 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #dedede 70%, #bebebe 80%, #898989 90%, #cfcfcf 100%); height: 144px'>
-          <div class="caption clearfix" data-place="5" data-rate="9" data-added="2023-01-13">
-
-            <h3><a>Теория каст и ролей</a> </h3>
-            <h4 class="clearfix">Алексей Крол 2018</h4>
-            <div class="rating rating_s_9">
+            <div class="rating rating_s_{{ book.rating }}">
             </div>
           </div>
 
-          <div class="hid">Теория каст и ролей Алексей Крол 2018</div>
+          <div class="hid">{{ book.title }} {{ book.author }} {{ book.year }}</div>
         </div>
+
+
       </div>
-
-
-
-      <div class="book_listview" id="bl_3">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #bebebe 0%, #e6e6e6 10%, #6e6e6e 20%, #dcdcdc 30%, #898989 40%,  50%, #898989 60%, #dcdcdc 70%, #6e6e6e 80%, #e6e6e6 90%, #bebebe 100%); height: 135px'>
-          <div class="caption clearfix" data-place="6" data-rate="8" data-added="2020-01-28">
-
-            <h3><a>The Alchemist</a> </h3>
-            <h4 class="clearfix">Paulo Coelho 1988</h4>
-
-            <div class="rating rating_s_8">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">The Alchemist Paulo Coelho 1988</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_20">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #e6e6e6 0%, #aaaaaa 10%, #e6e6e6 20%, #d9d9d9 30%, #dedede 40%,  50%, #dedede 60%, #d9d9d9 70%, #e6e6e6 80%, #aaaaaa 90%, #e6e6e6 100%); height: 130px'>
-          <div class="caption clearfix" data-place="7" data-rate="8" data-added="2020-08-13">
-
-            <h3><a>Nineteen eighty four movie</a> </h3>
-            <h4 class="clearfix">George Orwell 1949</h4>
-
-            <div class="rating rating_s_8">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Nineteen eighty four movie George Orwell 1949</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_21">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #d1d1d1 0%, #898989 10%, #dedede 20%, #bebebe 30%, #dedede 40%,  50%, #dedede 60%, #bebebe 70%, #dedede 80%, #898989 90%, #d1d1d1 100%); height: 142px'>
-          <div class="caption clearfix" data-place="8" data-rate="8" data-added="2020-08-13">
-
-            <h3><a>Национализация рубля. Путь к свободе России</a> </h3>
-            <h4 class="clearfix">Nikolaj Starikov 2013</h4>
-
-            <div class="rating rating_s_8">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Национализация рубля. Путь к свободе России Nikolaj Starikov 2013</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_22">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #bebebe 0%, #cfcfcf 10%, #e6e6e6 20%, #6e6e6e 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #6e6e6e 70%, #e6e6e6 80%, #cfcfcf 90%, #bebebe 100%); height: 135px'>
-          <div class="caption clearfix" data-place="9" data-rate="8" data-added="2020-10-15">
-
-            <h3><a>The Count of Monte Cristo</a> </h3>
-            <h4 class="clearfix">Aleksandras Diuma 1844</h4>
-
-            <div class="rating rating_s_8">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">The Count of Monte Cristo Aleksandras Diuma 1844</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_23">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #6e6e6e 0%, #cfcfcf 10%, #aaaaaa 20%, #bebebe 30%, #898989 40%,  50%, #898989 60%, #bebebe 70%, #aaaaaa 80%, #cfcfcf 90%, #6e6e6e 100%); height: 145px'>
-          <div class="caption clearfix" data-place="10" data-rate="8" data-added="2020-12-07">
-
-            <h3><a>Sapiens</a> </h3>
-            <h4 class="clearfix"> Yuval Noah Harari 2015</h4>
-
-            <div class="rating rating_s_8">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Sapiens  Yuval Noah Harari 2015</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_25">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #898989 0%, #898989 10%, #898989 20%, #e6e6e6 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #e6e6e6 70%, #898989 80%, #898989 90%, #898989 100%); height: 144px'>
-          <div class="caption clearfix" data-place="11" data-rate="8" data-added="2021-01-30">
-
-            <h3><a>Metro 2033</a> </h3>
-            <h4 class="clearfix">Dmitrijus Gluchovskis 2005</h4>
-
-            <div class="rating rating_s_8">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Metro 2033 Dmitrijus Gluchovskis 2005</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_26">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #898989 0%, #dcdcdc 10%, #898989 20%, #bebebe 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #bebebe 70%, #898989 80%, #dcdcdc 90%, #898989 100%); height: 144px'>
-          <div class="caption clearfix" data-place="12" data-rate="8" data-added="2021-08-21">
-
-            <h3><a>Будущее</a> </h3>
-            <h4 class="clearfix">Дмитрий Глуховский 2013</h4>
-
-            <div class="rating rating_s_8">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Будущее Дмитрий Глуховский 2013</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_29">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #dedede 0%, #aaaaaa 10%, #d1d1d1 20%, #cfcfcf 30%, #dcdcdc 40%,  50%, #dcdcdc 60%, #cfcfcf 70%, #d1d1d1 80%, #aaaaaa 90%, #dedede 100%); height: 142px'>
-          <div class="caption clearfix" data-place="13" data-rate="8" data-added="2022-11-05">
-
-            <h3><a>Games People Play</a> </h3>
-            <h4 class="clearfix">Eric Berne 1964</h4>
-
-            <div class="rating rating_s_8">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Games People Play Eric Berne 1964</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_30">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #e6e6e6 0%, #bebebe 10%, #d9d9d9 20%, #898989 30%, #dedede 40%,  50%, #dedede 60%, #898989 70%, #d9d9d9 80%, #bebebe 90%, #e6e6e6 100%); height: 143px'>
-          <div class="caption clearfix" data-place="14" data-rate="8" data-added="2022-11-05">
-
-            <h3><a>Древний</a> </h3>
-            <h4 class="clearfix">Сергей Тармашев 2008</h4>
-
-            <div class="rating rating_s_8">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Древний Сергей Тармашев 2008</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_32">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #d1d1d1 0%, #cfcfcf 10%, #b2b2b2 20%, #6e6e6e 30%, #dedede 40%,  50%, #dedede 60%, #6e6e6e 70%, #b2b2b2 80%, #cfcfcf 90%, #d1d1d1 100%); height: 134px'>
-          <div class="caption clearfix" data-place="15" data-rate="8" data-added="2022-12-25">
-
-            <h3><a>The Teachings of Don Juan</a> </h3>
-            <h4 class="clearfix">Carlos Castaneda 1968</h4>
-
-            <div class="rating rating_s_8">
-            </div>
-          </div>
-          <div class="hid">The Teachings of Don Juan Carlos Castaneda 1968</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_37">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #dcdcdc 0%, #6e6e6e 10%, #898989 20%, #bebebe 30%, #d9d9d9 40%,  50%, #d9d9d9 60%, #bebebe 70%, #898989 80%, #6e6e6e 90%, #dcdcdc 100%); height: 138px'>
-          <div class="caption clearfix" data-place="16" data-rate="8" data-added="2022-12-26">
-
-            <h3><a>Nineteen Eighty-Four</a> </h3>
-            <h4 class="clearfix">George Orwell 1949</h4>
-
-            <div class="rating rating_s_8">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Nineteen Eighty-Four George Orwell 1949</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_18">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #898989 0%, #6e6e6e 10%, #bebebe 20%, #aaaaaa 30%, #dcdcdc 40%,  50%, #dcdcdc 60%, #aaaaaa 70%, #bebebe 80%, #6e6e6e 90%, #898989 100%); height: 145px'>
-          <div class="caption clearfix" data-place="17" data-rate="8" data-added="2020-07-22">
-
-            <h3><a>Stranger in a Strange Land</a> </h3>
-            <h4 class="clearfix">Robert A. Heinlein 1961</h4>
-
-            <div class="rating rating_s_8">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Stranger in a Strange Land Robert A. Heinlein 1961</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_15">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #d9d9d9 0%, #bebebe 10%, #d9d9d9 20%, #aaaaaa 30%, #b2b2b2 40%,  50%, #b2b2b2 60%, #aaaaaa 70%, #d9d9d9 80%, #bebebe 90%, #d9d9d9 100%); height: 145px'>
-          <div class="caption clearfix" data-place="18" data-rate="8" data-added="2020-06-25">
-
-            <h3><a>The Sea-Wolf</a> </h3>
-            <h4 class="clearfix">Jack London 1904</h4>
-
-            <div class="rating rating_s_8">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">The Sea-Wolf Jack London 1904</div>
-        </div>
-      </div>
-
-
-
-
-      <div class="book_listview" id="bl_39">
-        <div class="thumbnail book_count_1" style='background: radial-gradient(#bc8342, rgb(153, 100, 41)); height: 139px'>
-          <div class="caption clearfix" data-place="39" data-rate="7" data-added="2023-02-09">
-
-            <h3><a>Sidharta (Siddhartha)</a></h3>
-            <h4 class="clearfix">Hermann Hesse 1922</h4>
-
-            <div class="rating rating_s_7">
-            </div>
-          </div>
-
-          <div class="hid">Sidharta Hermann Hesse 1922</div>
-        </div>
-      </div>
-
-
-      <div class="book_listview" id="bl_28">
-        <div class="thumbnail book_count_many" style='background: repeating-linear-gradient(90deg, #dedede 0%, #bebebe 10%, #aaaaaa 20%, #d1d1d1 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #d1d1d1 70%, #aaaaaa 80%, #bebebe 90%, #dedede 100%); height: 145px'>
-          <div class="caption clearfix" data-place="19" data-rate="7" data-added="2021-12-16">
-
-            <h3><a>Путь Шамана</a> Books in cicle 7</h3>
-            <h4 class="clearfix">Василий Маханенко 2015</h4>
-
-            <div class="rating rating_s_7">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Путь Шамана Василий Маханенко 2015</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_33">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #b2b2b2 0%, #dcdcdc 10%, #bebebe 20%, #d1d1d1 30%, #e6e6e6 40%,  50%, #e6e6e6 60%, #d1d1d1 70%, #bebebe 80%, #dcdcdc 90%, #b2b2b2 100%); height: 137px'>
-          <div class="caption clearfix" data-place="20" data-rate="7" data-added="2022-12-25">
-
-            <h3><a>A Separate Reality</a> </h3>
-            <h4 class="clearfix">Carlos Castaneda 1991</h4>
-
-            <div class="rating rating_s_7">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">A Separate Reality Carlos Castaneda 1991</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_7">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #898989 0%, #d9d9d9 10%, #aaaaaa 20%, #dcdcdc 30%, #e6e6e6 40%,  50%, #e6e6e6 60%, #dcdcdc 70%, #aaaaaa 80%, #d9d9d9 90%, #898989 100%); height: 131px'>
-          <div class="caption clearfix" data-place="21" data-rate="7" data-added="2020-01-28">
-
-            <h3><a>The Little Prince</a> </h3>
-            <h4 class="clearfix">Antoine de Saint-Exupéry 2000</h4>
-
-            <div class="rating rating_s_7">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">The Little Prince Antoine de Saint-Exupéry 2000</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_9">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #b2b2b2 0%, #dedede 10%, #898989 20%, #d9d9d9 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #d9d9d9 70%, #898989 80%, #dedede 90%, #b2b2b2 100%); height: 143px'>
-          <div class="caption clearfix" data-place="22" data-rate="7" data-added="2020-05-25">
-
-            <h3><a>Shantaram</a> </h3>
-            <h4 class="clearfix">Gregory David Roberts 2003</h4>
-
-            <div class="rating rating_s_7">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Shantaram Gregory David Roberts 2003</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_36">
-        <div class="thumbnail book_count_many" style='background: repeating-linear-gradient(90deg, #bebebe 0%, #dedede 10%, #e6e6e6 20%, #dedede 30%, #6e6e6e 40%,  50%, #6e6e6e 60%, #dedede 70%, #e6e6e6 80%, #dedede 90%, #bebebe 100%); height: 136px'>
-          <div class="caption clearfix" data-place="23" data-rate="7" data-added="2022-12-26">
-
-            <h3><a>Барлиона</a> Books in cicle 13</h3>
-            <h4 class="clearfix">Василий Маханенко 2014</h4>
-
-            <div class="rating rating_s_7">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Барлиона Василий Маханенко 2014</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_34">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #6e6e6e 0%, #b2b2b2 10%, #cfcfcf 20%, #d1d1d1 30%, #b2b2b2 40%,  50%, #b2b2b2 60%, #d1d1d1 70%, #cfcfcf 80%, #b2b2b2 90%, #6e6e6e 100%); height: 139px'>
-          <div class="caption clearfix" data-place="24" data-rate="7" data-added="2022-12-25">
-
-            <h3><a>Journey to Ixtlan</a> </h3>
-            <h4 class="clearfix">Carlos Castaneda 1975</h4>
-
-            <div class="rating rating_s_7">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Journey to Ixtlan Carlos Castaneda 1975</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_24">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #cfcfcf 0%, #6e6e6e 10%, #cfcfcf 20%, #dedede 30%, #dcdcdc 40%,  50%, #dcdcdc 60%, #dedede 70%, #cfcfcf 80%, #6e6e6e 90%, #cfcfcf 100%); height: 131px'>
-          <div class="caption clearfix" data-place="25" data-rate="7" data-added="2020-12-07">
-
-            <h3><a>Rich father poor father</a> </h3>
-            <h4 class="clearfix">Robert Kiyosaki 2000</h4>
-
-            <div class="rating rating_s_7">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Rich father poor father Robert Kiyosaki 2000</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_12">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #d1d1d1 0%, #d9d9d9 10%, #bebebe 20%, #6e6e6e 30%, #6e6e6e 40%,  50%, #6e6e6e 60%, #6e6e6e 70%, #bebebe 80%, #d9d9d9 90%, #d1d1d1 100%); height: 135px'>
-          <div class="caption clearfix" data-place="26" data-rate="7" data-added="2020-06-05">
-
-            <h3><a>Animal Farm</a> </h3>
-            <h4 class="clearfix">George Orwell  1945</h4>
-
-            <div class="rating rating_s_7">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Animal Farm George Orwell  1945</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_13">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #d1d1d1 0%, #898989 10%, #cfcfcf 20%, #bebebe 30%, #b2b2b2 40%,  50%, #b2b2b2 60%, #bebebe 70%, #cfcfcf 80%, #898989 90%, #d1d1d1 100%); height: 132px'>
-          <div class="caption clearfix" data-place="27" data-rate="7" data-added="2020-06-05">
-
-            <h3><a>Человек на часах</a> </h3>
-            <h4 class="clearfix">Н. С. Лесков 1887</h4>
-
-            <div class="rating rating_s_7">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Человек на часах Н. С. Лесков 1887</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_6">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #dcdcdc 0%, #6e6e6e 10%, #dcdcdc 20%, #d9d9d9 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #d9d9d9 70%, #dcdcdc 80%, #6e6e6e 90%, #dcdcdc 100%); height: 143px'>
-          <div class="caption clearfix" data-place="28" data-rate="7" data-added="2020-01-28">
-
-            <h3><a>For Whom the Bell Tolls</a> </h3>
-            <h4 class="clearfix">Ernest Hemingway 1940</h4>
-
-            <div class="rating rating_s_7">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">For Whom the Bell Tolls Ernest Hemingway 1940</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_11">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #898989 0%, #e6e6e6 10%, #bebebe 20%, #aaaaaa 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #aaaaaa 70%, #bebebe 80%, #e6e6e6 90%, #898989 100%); height: 138px'>
-          <div class="caption clearfix" data-place="29" data-rate="6" data-added="2020-06-04">
-
-            <h3><a>The Catcher in the Rye</a> </h3>
-            <h4 class="clearfix">Jerome D. Salinger 1951</h4>
-
-            <div class="rating rating_s_6">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">The Catcher in the Rye Jerome D. Salinger 1951</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_35">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #aaaaaa 0%, #6e6e6e 10%, #6e6e6e 20%, #e6e6e6 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #e6e6e6 70%, #6e6e6e 80%, #6e6e6e 90%, #aaaaaa 100%); height: 145px'>
-          <div class="caption clearfix" data-place="30" data-rate="6" data-added="2022-12-25">
-
-            <h3><a>Tales of Power</a> </h3>
-            <h4 class="clearfix">Carlos Castaneda 1974</h4>
-
-            <div class="rating rating_s_6">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Tales of Power Carlos Castaneda 1974</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_4">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #cfcfcf 0%, #dedede 10%, #aaaaaa 20%, #898989 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #898989 70%, #aaaaaa 80%, #dedede 90%, #cfcfcf 100%); height: 141px'>
-          <div class="caption clearfix" data-place="31" data-rate="6" data-added="2020-01-28">
-
-            <h3><a>On the Road</a> </h3>
-            <h4 class="clearfix">Jack Kerouac 1957</h4>
-
-            <div class="rating rating_s_6">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">On the Road Jack Kerouac 1957</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_14">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #bebebe 0%, #b2b2b2 10%, #d1d1d1 20%, #aaaaaa 30%, #898989 40%,  50%, #898989 60%, #aaaaaa 70%, #d1d1d1 80%, #b2b2b2 90%, #bebebe 100%); height: 131px'>
-          <div class="caption clearfix" data-place="32" data-rate="6" data-added="2020-06-25">
-
-            <h3><a>Vremena goda</a> </h3>
-            <h4 class="clearfix">Анна Борисова 2011</h4>
-
-            <div class="rating rating_s_6">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Vremena goda Анна Борисова 2011</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_10">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #aaaaaa 0%, #898989 10%, #e6e6e6 20%, #e6e6e6 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #e6e6e6 70%, #e6e6e6 80%, #898989 90%, #aaaaaa 100%); height: 133px'>
-          <div class="caption clearfix" data-place="33" data-rate="6" data-added="2020-05-25">
-
-            <h3><a>Crime And Punishment</a> </h3>
-            <h4 class="clearfix">Fyodor Dostoevsky </h4>
-
-            <div class="rating rating_s_6">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Crime And Punishment Fyodor Dostoevsky </div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_17">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #d1d1d1 0%, #aaaaaa 10%, #e6e6e6 20%, #cfcfcf 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #cfcfcf 70%, #e6e6e6 80%, #aaaaaa 90%, #d1d1d1 100%); height: 131px'>
-          <div class="caption clearfix" data-place="34" data-rate="5" data-added="2020-07-22">
-
-            <h3><a>One Hundred Years of Solitude</a> </h3>
-            <h4 class="clearfix">Gabriel Garcia Marquez 1967</h4>
-
-            <div class="rating rating_s_5">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">One Hundred Years of Solitude Gabriel Garcia Marquez 1967</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_2">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #6e6e6e 0%, #cfcfcf 10%, #bebebe 20%, #b2b2b2 30%, #b2b2b2 40%,  50%, #b2b2b2 60%, #b2b2b2 70%, #bebebe 80%, #cfcfcf 90%, #6e6e6e 100%); height: 140px'>
-          <div class="caption clearfix" data-place="35" data-rate="5" data-added="2020-01-28">
-
-            <h3><a>Трое в лодке не считая собаки</a> </h3>
-            <h4 class="clearfix">Jerome K. Jerome 1979</h4>
-
-            <div class="rating rating_s_5">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Трое в лодке не считая собаки Jerome K. Jerome 1979</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_16">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #e6e6e6 0%, #dedede 10%, #bebebe 20%, #6e6e6e 30%, #e6e6e6 40%,  50%, #e6e6e6 60%, #6e6e6e 70%, #bebebe 80%, #dedede 90%, #e6e6e6 100%); height: 140px'>
-          <div class="caption clearfix" data-place="36" data-rate="5" data-added="2020-07-01">
-
-            <h3><a>Детство тёмы</a> </h3>
-            <h4 class="clearfix">Николая Гарина-Михайловского 1892</h4>
-
-            <div class="rating rating_s_5">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">Детство тёмы Николая Гарина-Михайловского 1892</div>
-        </div>
-      </div>
-
-
-
-      <div class="book_listview" id="bl_5">
-        <div class="thumbnail book_count_1" style='background: repeating-linear-gradient(90deg, #dedede 0%, #898989 10%, #6e6e6e 20%, #bebebe 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #bebebe 70%, #6e6e6e 80%, #898989 90%, #dedede 100%); height: 136px'>
-          <div class="caption clearfix" data-place="37" data-rate="4" data-added="2020-01-28">
-
-            <h3><a>War and Peace</a> </h3>
-            <h4 class="clearfix">Leo Tolstoy </h4>
-
-            <div class="rating rating_s_4">
-
-            </div>
-
-
-
-          </div>
-
-
-          <div class="hid">War and Peace Leo Tolstoy </div>
-        </div>
-      </div>
-
-
     </div>
 
 
 
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            books: [
+              { 
+                id: 1, 
+                title: 'Искажающие Реальность', 
+                author: 'Михаил Атаманов',
+                year: 2017, 
+                read_books: 10,
+                total_books: 10,
+                last_read: '2021-09-28',
+                rating: 10,
+                style_background: 'background: repeating-linear-gradient(90deg, #6e6e6e 0%, #b2b2b2 10%, #6e6e6e 20%, #dcdcdc 30%, #898989 40%,  50%, #898989 60%, #dcdcdc 70%, #6e6e6e 80%, #b2b2b2 90%, #6e6e6e 100%)',
+                style_height: 139,
+
+              },
+              { 
+                id: 2, 
+                title: 'На западном фронте без перемен', 
+                author: 'Erichas Marija Remarkas',
+                year: 1928, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2021-09-27',
+                rating: 8,
+                style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #b2b2b2 10%, #b2b2b2 20%, #e6e6e6 30%, #d9d9d9 40%,  50%, #d9d9d9 60%, #e6e6e6 70%, #b2b2b2 80%, #b2b2b2 90%, #d1d1d1 100%)',
+                style_height: 133,
+              },
+              { 
+                id: 3, 
+                title: 'Yellow Line', 
+                author: 'Mikhail Tyrin',
+                year: 2003, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-08-08',
+                rating: 9,
+                style_background: 'background: linear-gradient(180deg, rgba(233,233,233,1) 0%, rgba(230,230,230,1) 43%, rgba(248,255,80,1) 48%, rgba(241,241,241,1) 52%, rgba(223,223,223,1) 100%);',
+                style_height: 134,
+              },
+              { 
+                id: 4, 
+                title: 'White fang', 
+                author: 'Jack London',
+                year: 1906, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-05-25',
+                rating: 9,
+                style_background: 'background: repeating-linear-gradient(90deg, #b2b2b2 0%, #d1d1d1 10%, #dedede 20%, #898989 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #898989 70%, #dedede 80%, #d1d1d1 90%, #b2b2b2 100%)',
+                style_height: 144,
+              },
+              { 
+                id: 5, 
+                title: 'Теория каст и ролей', 
+                author: 'Алексей Крол',
+                year: 2018, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2023-01-13',
+                rating: 9,
+                style_background: 'background: repeating-linear-gradient(90deg, #cfcfcf 0%, #898989 10%, #bebebe 20%, #dedede 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #dedede 70%, #bebebe 80%, #898989 90%, #cfcfcf 100%)',
+                style_height: 142,
+              },
+              { 
+                id: 6, 
+                title: 'The Alchemist', 
+                author: 'Paulo Coelho',
+                year: 1988, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-01-28',
+                rating: 8,
+                style_background: 'background: repeating-linear-gradient(90deg, #bebebe 0%, #e6e6e6 10%, #6e6e6e 20%, #dcdcdc 30%, #898989 40%,  50%, #898989 60%, #dcdcdc 70%, #6e6e6e 80%, #e6e6e6 90%, #bebebe 100%)',
+                style_height: 135,
+              },
+              { 
+                id: 7, 
+                title: 'Nineteen eighty four movie', 
+                author: 'George Orwell',
+                year: 1949, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-08-13',
+                rating: 8,
+                style_background: 'background: repeating-linear-gradient(90deg, #e6e6e6 0%, #aaaaaa 10%, #e6e6e6 20%, #d9d9d9 30%, #dedede 40%,  50%, #dedede 60%, #d9d9d9 70%, #e6e6e6 80%, #aaaaaa 90%, #e6e6e6 100%)',
+                style_height: 130,
+              },
+              { 
+                id: 8, 
+                title: 'Национализация рубля. Путь к свободе России', 
+                author: 'Nikolaj Starikov',
+                year: 2013, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-08-13',
+                rating: 8,
+                style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #898989 10%, #dedede 20%, #bebebe 30%, #dedede 40%,  50%, #dedede 60%, #bebebe 70%, #dedede 80%, #898989 90%, #d1d1d1 100%)',
+                style_height: 142,
+              },
+              { 
+                id: 9, 
+                title: 'The Count of Monte Cristo', 
+                author: 'Aleksandras Diuma',
+                year: 1844, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-10-15',
+                rating: 8,
+                style_background: 'background: repeating-linear-gradient(90deg, #bebebe 0%, #cfcfcf 10%, #e6e6e6 20%, #6e6e6e 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #6e6e6e 70%, #e6e6e6 80%, #cfcfcf 90%, #bebebe 100%)',
+                style_height: 135,
+              },
+              { 
+                id: 10, 
+                title: 'Sapiens', 
+                author: 'Yuval Noah Harari',
+                year: 2015, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-12-07',
+                rating: 8,
+                style_background: 'background: repeating-linear-gradient(90deg, #6e6e6e 0%, #cfcfcf 10%, #aaaaaa 20%, #bebebe 30%, #898989 40%,  50%, #898989 60%, #bebebe 70%, #aaaaaa 80%, #cfcfcf 90%, #6e6e6e 100%)',
+                style_height: 145,
+              },
+              { 
+                id: 11, 
+                title: 'Metro 2033', 
+                author: 'Dmitrijus Gluchovskis',
+                year: 2005, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2021-01-30',
+                rating: 8,
+                style_background: 'background: radial-gradient(circle, rgba(167,167,167,1) 0%, rgba(80,80,80,1) 60%);',
+                style_height: 142,
+              },
+              { 
+                id: 12, 
+                title: 'Будущее', 
+                author: 'Дмитрий Глуховский',
+                year: 2013, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2021-08-21',
+                rating: 8,
+                style_background: 'background: repeating-linear-gradient(90deg, #898989 0%, #dcdcdc 10%, #898989 20%, #bebebe 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #bebebe 70%, #898989 80%, #dcdcdc 90%, #898989 100%)',
+                style_height: 144,
+              },
+              { 
+                id: 13, 
+                title: 'Games People Play', 
+                author: 'Eric Berne',
+                year: 1964, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2022-11-05',
+                rating: 8,
+                style_background: 'background: repeating-linear-gradient(90deg, #dedede 0%, #aaaaaa 10%, #d1d1d1 20%, #cfcfcf 30%, #dcdcdc 40%,  50%, #dcdcdc 60%, #cfcfcf 70%, #d1d1d1 80%, #aaaaaa 90%, #dedede 100%)',
+                style_height: 140,
+              },
+              { 
+                id: 14, 
+                title: 'Древний', 
+                author: 'Сергей Тармашев',
+                year: 2008, 
+                read_books: 6,
+                total_books: 7,
+                last_read: '2022-11-05',
+                rating: 8,
+                style_background: 'background: repeating-linear-gradient(90deg, #e6e6e6 0%, #bebebe 10%, #d9d9d9 20%, #898989 30%, #dedede 40%,  50%, #dedede 60%, #898989 70%, #d9d9d9 80%, #bebebe 90%, #e6e6e6 100%)',
+                style_height: 136,
+              },
+              { 
+                id: 15, 
+                title: 'The Teachings of Don Juan', 
+                author: 'Carlos Castaneda',
+                year: 1968, 
+                read_books: 4,
+                total_books: 8,
+                last_read: '2022-12-25',
+                rating: 8,
+                style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #cfcfcf 10%, #b2b2b2 20%, #6e6e6e 30%, #dedede 40%,  50%, #dedede 60%, #6e6e6e 70%, #b2b2b2 80%, #cfcfcf 90%, #d1d1d1 100%)',
+                style_height: 136,
+              },
+              { 
+                id: 16, 
+                title: 'Nineteen Eighty-Four', 
+                author: 'George Orwell',
+                year: 1949, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2022-12-25',
+                rating: 8,
+                style_background: 'background: repeating-linear-gradient(90deg, #dcdcdc 0%, #6e6e6e 10%, #898989 20%, #bebebe 30%, #d9d9d9 40%,  50%, #d9d9d9 60%, #bebebe 70%, #898989 80%, #6e6e6e 90%, #dcdcdc 100%)',
+                style_height: 138,
+              },
+              { 
+                id: 17, 
+                title: 'Stranger in a Strange Land', 
+                author: 'Robert A. Heinlein',
+                year: 1961, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-07-22',
+                rating: 8,
+                style_background: 'background: repeating-linear-gradient(90deg, #898989 0%, #6e6e6e 10%, #bebebe 20%, #aaaaaa 30%, #dcdcdc 40%,  50%, #dcdcdc 60%, #aaaaaa 70%, #bebebe 80%, #6e6e6e 90%, #898989 100%)',
+                style_height: 145,
+              },
+              { 
+                id: 18, 
+                title: 'The Sea-Wolf', 
+                author: 'Jack London',
+                year: 1904, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-06-25',
+                rating: 8,
+                style_background: 'background: repeating-linear-gradient(90deg, #d9d9d9 0%, #bebebe 10%, #d9d9d9 20%, #aaaaaa 30%, #b2b2b2 40%,  50%, #b2b2b2 60%, #aaaaaa 70%, #d9d9d9 80%, #bebebe 90%, #d9d9d9 100%)',
+                style_height: 140,
+              },
+              { 
+                id: 19, 
+                title: 'Sidharta (Siddhartha)', 
+                author: 'Hermann Hesse',
+                year: 1922, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2023-02-09',
+                rating: 7,
+                style_background: 'background: radial-gradient(#bc8342, rgb(153, 100, 41))',
+                style_height: 139,
+              },
+              { 
+                id: 20, 
+                title: 'Путь Шамана', 
+                author: 'Василий Маханенко',
+                year: 2015, 
+                read_books: 1,
+                total_books: 7,
+                last_read: '2021-12-16',
+                rating: 7,
+                style_background: 'background: repeating-linear-gradient(90deg, #dedede 0%, #bebebe 10%, #aaaaaa 20%, #d1d1d1 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #d1d1d1 70%, #aaaaaa 80%, #bebebe 90%, #dedede 100%)',
+                style_height: 145,
+              },
+              { 
+                id: 21, 
+                title: 'The Little Prince', 
+                author: 'Antoine de Saint-Exupéry',
+                year: 2000, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-01-28',
+                rating: 7,
+                style_background: 'background: repeating-linear-gradient(90deg, #898989 0%, #d9d9d9 10%, #aaaaaa 20%, #dcdcdc 30%, #e6e6e6 40%,  50%, #e6e6e6 60%, #dcdcdc 70%, #aaaaaa 80%, #d9d9d9 90%, #898989 100%)',
+                style_height: 133,
+              },
+
+              { 
+                id: 22, 
+                title: 'Shantaram', 
+                author: 'Gregory David Roberts',
+                year: 2003, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-01-28',
+                rating: 7,
+                style_background: 'background: repeating-linear-gradient(90deg, #b2b2b2 0%, #dedede 10%, #898989 20%, #d9d9d9 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #d9d9d9 70%, #898989 80%, #dedede 90%, #b2b2b2 100%)',
+                style_height: 143,
+              },
+
+              { 
+                id: 23, 
+                title: 'Барлиона', 
+                author: 'Василий Маханенко',
+                year: 2014, 
+                read_books: 13,
+                total_books: 13,
+                last_read: '2022-12-26',
+                rating: 7,
+                style_background: 'background: repeating-linear-gradient(90deg, #bebebe 0%, #dedede 10%, #e6e6e6 20%, #dedede 30%, #6e6e6e 40%,  50%, #6e6e6e 60%, #dedede 70%, #e6e6e6 80%, #dedede 90%, #bebebe 100%)',
+                style_height: 136,
+              },
+
+              { 
+                id: 24, 
+                title: 'Rich father poor father', 
+                author: 'Robert Kiyosaki',
+                year: 2000, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-12-07',
+                rating: 7,
+                style_background: 'background: repeating-linear-gradient(90deg, #cfcfcf 0%, #6e6e6e 10%, #cfcfcf 20%, #dedede 30%, #dcdcdc 40%,  50%, #dcdcdc 60%, #dedede 70%, #cfcfcf 80%, #6e6e6e 90%, #cfcfcf 100%)',
+                style_height: 131,
+              },
+              { 
+                id: 25, 
+                title: 'Animal Farm', 
+                author: 'George Orwell',
+                year: 1945, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-06-05',
+                rating: 7,
+                style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #d9d9d9 10%, #bebebe 20%, #6e6e6e 30%, #6e6e6e 40%,  50%, #6e6e6e 60%, #6e6e6e 70%, #bebebe 80%, #d9d9d9 90%, #d1d1d1 100%)',
+                style_height: 135,
+              },
+              { 
+                id: 26, 
+                title: 'Человек на часах', 
+                author: 'Н. С. Лесков',
+                year: 1887, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-06-05',
+                rating: 7,
+                style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #898989 10%, #cfcfcf 20%, #bebebe 30%, #b2b2b2 40%,  50%, #b2b2b2 60%, #bebebe 70%, #cfcfcf 80%, #898989 90%, #d1d1d1 100%)',
+                style_height: 132,
+              },
+              { 
+                id: 27, 
+                title: 'For Whom the Bell Tolls', 
+                author: 'Ernest Hemingway',
+                year: 1940, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-01-28',
+                rating: 7,
+                style_background: 'background: repeating-linear-gradient(90deg, #dcdcdc 0%, #6e6e6e 10%, #dcdcdc 20%, #d9d9d9 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #d9d9d9 70%, #dcdcdc 80%, #6e6e6e 90%, #dcdcdc 100%)',
+                style_height: 143,
+              },
+              { 
+                id: 28, 
+                title: 'The Catcher in the Rye', 
+                author: 'Jerome D. Salinger',
+                year: 1951, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-06-04',
+                rating: 6,
+                style_background: 'background: repeating-linear-gradient(90deg, #898989 0%, #e6e6e6 10%, #bebebe 20%, #aaaaaa 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #aaaaaa 70%, #bebebe 80%, #e6e6e6 90%, #898989 100%)',
+                style_height: 138,
+              },
+              { 
+                id: 29, 
+                title: 'Tales of Power', 
+                author: 'Carlos Castaneda',
+                year: 1974, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2022-12-25',
+                rating: 6,
+                style_background: 'background: repeating-linear-gradient(90deg, #aaaaaa 0%, #6e6e6e 10%, #6e6e6e 20%, #e6e6e6 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #e6e6e6 70%, #6e6e6e 80%, #6e6e6e 90%, #aaaaaa 100%)',
+                style_height: 145,
+              },
+              { 
+                id: 30, 
+                title: 'On the Road', 
+                author: 'Jack Kerouac',
+                year: 1957, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-01-28',
+                rating: 6,
+                style_background: 'background: repeating-linear-gradient(90deg, #cfcfcf 0%, #dedede 10%, #aaaaaa 20%, #898989 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #898989 70%, #aaaaaa 80%, #dedede 90%, #cfcfcf 100%)',
+                style_height: 141,
+              },
+              { 
+                id: 31, 
+                title: 'Vremena goda', 
+                author: 'Анна Борисова',
+                year: 2011, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-06-25',
+                rating: 6,
+                style_background: 'background: repeating-linear-gradient(90deg, #bebebe 0%, #b2b2b2 10%, #d1d1d1 20%, #aaaaaa 30%, #898989 40%,  50%, #898989 60%, #aaaaaa 70%, #d1d1d1 80%, #b2b2b2 90%, #bebebe 100%)',
+                style_height: 131,
+              },
+              { 
+                id: 32, 
+                title: ' Crime And Punishment', 
+                author: 'Fyodor Dostoevsky',
+                year: 2011, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-05-25',
+                rating: 6,
+                style_background: 'background: repeating-linear-gradient(90deg, #aaaaaa 0%, #898989 10%, #e6e6e6 20%, #e6e6e6 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #e6e6e6 70%, #e6e6e6 80%, #898989 90%, #aaaaaa 100%)',
+                style_height: 133,
+              },
+              { 
+                id: 33, 
+                title: 'One Hundred Years of Solitude', 
+                author: 'Gabriel Garcia Marquez',
+                year: 1967, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-07-22',
+                rating: 5,
+                style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #aaaaaa 10%, #e6e6e6 20%, #cfcfcf 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #cfcfcf 70%, #e6e6e6 80%, #aaaaaa 90%, #d1d1d1 100%)',
+                style_height: 131,
+              },
+              { 
+                id: 34, 
+                title: 'Трое в лодке не считая собаки', 
+                author: 'Jerome K. Jerome',
+                year: 1979, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-01-28',
+                rating: 6,
+                style_background: 'background: repeating-linear-gradient(90deg, #6e6e6e 0%, #cfcfcf 10%, #bebebe 20%, #b2b2b2 30%, #b2b2b2 40%,  50%, #b2b2b2 60%, #b2b2b2 70%, #bebebe 80%, #cfcfcf 90%, #6e6e6e 100%)',
+                style_height: 140,
+              },
+              { 
+                id: 35, 
+                title: 'Детство тёмы', 
+                author: 'Николая Гарина-Михайловского',
+                year: 1892, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-07-01',
+                rating: 5,
+                style_background: 'background: repeating-linear-gradient(90deg, #e6e6e6 0%, #dedede 10%, #bebebe 20%, #6e6e6e 30%, #e6e6e6 40%,  50%, #e6e6e6 60%, #6e6e6e 70%, #bebebe 80%, #dedede 90%, #e6e6e6 100%)',
+                style_height: 140,
+              },
+              { 
+                id: 36, 
+                title: 'War and Peace', 
+                author: 'Leo Tolstoy',
+                year: 1892, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2020-01-28',
+                rating: 4,
+                style_background: 'background: repeating-linear-gradient(90deg, #dedede 0%, #898989 10%, #6e6e6e 20%, #bebebe 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #bebebe 70%, #6e6e6e 80%, #898989 90%, #dedede 100%)',
+                style_height: 136,
+              },
+              { 
+                id: 37, 
+                title: 'Man\'s Search for Meaning', 
+                author: 'Viktor E. Frankl',
+                year: 1947, 
+                read_books: 1,
+                total_books: 1,
+                last_read: '2023-03-05',
+                rating: 7,
+                style_background: 'background: radial-gradient(circle, rgba(92,55,73,1) 0%, rgba(208,191,167,1) 66%);',
+                style_height: 130,
+              }
 
 
+
+              
+            ]
+          };
+        },
+        mounted:function(){
+              this.sortRating()
+        },
+        methods: {
+          sortTitle() {
+            this.books.sort((a, b) => {
+              return a.title.localeCompare(b.title);
+            });
+          },
+          sortRating() {
+
+            function compare(a, b) {
+              if (a.rating < b.rating)
+                return 1;
+              if (a.rating > b.rating)
+                return -1;
+              return 0;
+            }
+
+            return this.books.sort(compare);
+
+          }
+        }
+      });
+      
+      app.mount('#app');
+    </script>
+
+
+
+
+
+
+    </div>
   </div>
 
 
@@ -849,7 +550,7 @@
 
 
 
-  <style>
+<style>
   body 
   {
    background: #322110;
