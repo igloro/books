@@ -12,15 +12,14 @@
 
  </head>
  <body>
-   <div class="container" itemscope itemtype="http://schema.org/WebPage">
-     
-    
-    <div class="row margint10">
 
-    <div id="app">
+<div id="app">
+  <div class="container" itemscope itemtype="http://schema.org/WebPage">
+    <div class="row margint10">
       <div class="clearfix" id="sorting">
         <button @click="sortTitle">Title</button>
         <button @click="sortRating">Rating</button>
+        <button @click="sortLastread">Last</button>
       </div>
 
       <div v-for="book in books" class="book_listview" :key="book.id" :id="'bl_' + book.id">
@@ -31,544 +30,553 @@
           >
             <div class="caption clearfix" data-place="1" data-rate="{{ book.rating }}" data-added="{{ book.last_read }}">
 
-            <h3><a>{{ book.title }}</a> <span v-if="book.total_books > 1">Books in cicle {{ book.total_books }}</span></h3>
-            <h4 class="clearfix">{{ book.author }} {{ book.year }}</h4>
+              <h3><a>{{ book.title }}</a> <span v-if="book.total_books > 1">Books in cicle {{ book.total_books }}</span></h3>
+              <h4 class="clearfix">{{ book.author }} {{ book.year }}</h4>
 
-            <div class="rating rating_s_{{ book.rating }}">
+              <div class="rating rating_s_{{ book.rating }}"></div>
             </div>
-          </div>
 
-          <div class="hid">{{ book.title }} {{ book.author }} {{ book.year }}</div>
+            <div class="hid">{{ book.title }} {{ book.author }} {{ book.year }}</div>
         </div>
-
-
       </div>
     </div>
-
-
-
-    <script>
-      const app = Vue.createApp({
-        data() {
-          return {
-            books: [
-              { 
-                id: 1, 
-                title: 'Искажающие Реальность', 
-                author: 'Михаил Атаманов',
-                year: 2017, 
-                read_books: 10,
-                total_books: 10,
-                last_read: '2021-09-28',
-                rating: 10,
-                style_background: 'background: repeating-linear-gradient(90deg, #6e6e6e 0%, #b2b2b2 10%, #6e6e6e 20%, #dcdcdc 30%, #898989 40%,  50%, #898989 60%, #dcdcdc 70%, #6e6e6e 80%, #b2b2b2 90%, #6e6e6e 100%)',
-                style_height: 139,
-
-              },
-              { 
-                id: 2, 
-                title: 'На западном фронте без перемен', 
-                author: 'Erichas Marija Remarkas',
-                year: 1928, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2021-09-27',
-                rating: 8,
-                style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #b2b2b2 10%, #b2b2b2 20%, #e6e6e6 30%, #d9d9d9 40%,  50%, #d9d9d9 60%, #e6e6e6 70%, #b2b2b2 80%, #b2b2b2 90%, #d1d1d1 100%)',
-                style_height: 133,
-              },
-              { 
-                id: 3, 
-                title: 'Yellow Line', 
-                author: 'Mikhail Tyrin',
-                year: 2003, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-08-08',
-                rating: 9,
-                style_background: 'background: linear-gradient(180deg, rgba(233,233,233,1) 0%, rgba(230,230,230,1) 43%, rgba(248,255,80,1) 48%, rgba(241,241,241,1) 52%, rgba(223,223,223,1) 100%);',
-                style_height: 134,
-              },
-              { 
-                id: 4, 
-                title: 'White fang', 
-                author: 'Jack London',
-                year: 1906, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-05-25',
-                rating: 9,
-                style_background: 'background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(158, 158, 158, 1) 20%, rgba(58, 58, 58, 1) 60%);',
-                style_height: 144,
-              },
-              { 
-                id: 5, 
-                title: 'Теория каст и ролей', 
-                author: 'Алексей Крол',
-                year: 2018, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2023-01-13',
-                rating: 9,
-                style_background: 'background: repeating-linear-gradient(90deg, #cfcfcf 0%, #898989 10%, #bebebe 20%, #dedede 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #dedede 70%, #bebebe 80%, #898989 90%, #cfcfcf 100%)',
-                style_height: 142,
-              },
-              { 
-                id: 6, 
-                title: 'The Alchemist', 
-                author: 'Paulo Coelho',
-                year: 1988, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-01-28',
-                rating: 8,
-                style_background: 'background: repeating-linear-gradient(90deg, #bebebe 0%, #e6e6e6 10%, #6e6e6e 20%, #dcdcdc 30%, #898989 40%,  50%, #898989 60%, #dcdcdc 70%, #6e6e6e 80%, #e6e6e6 90%, #bebebe 100%)',
-                style_height: 135,
-              },
-              { 
-                id: 7, 
-                title: 'Nineteen eighty four movie', 
-                author: 'George Orwell',
-                year: 1949, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-08-13',
-                rating: 8,
-                style_background: 'background: repeating-linear-gradient(90deg, #e6e6e6 0%, #aaaaaa 10%, #e6e6e6 20%, #d9d9d9 30%, #dedede 40%,  50%, #dedede 60%, #d9d9d9 70%, #e6e6e6 80%, #aaaaaa 90%, #e6e6e6 100%)',
-                style_height: 130,
-              },
-              { 
-                id: 8, 
-                title: 'Национализация рубля. Путь к свободе России', 
-                author: 'Nikolaj Starikov',
-                year: 2013, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-08-13',
-                rating: 8,
-                style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #898989 10%, #dedede 20%, #bebebe 30%, #dedede 40%,  50%, #dedede 60%, #bebebe 70%, #dedede 80%, #898989 90%, #d1d1d1 100%)',
-                style_height: 142,
-              },
-              { 
-                id: 9, 
-                title: 'The Count of Monte Cristo', 
-                author: 'Aleksandras Diuma',
-                year: 1844, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-10-15',
-                rating: 8,
-                style_background: 'background: repeating-linear-gradient(90deg, #bebebe 0%, #cfcfcf 10%, #e6e6e6 20%, #6e6e6e 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #6e6e6e 70%, #e6e6e6 80%, #cfcfcf 90%, #bebebe 100%)',
-                style_height: 135,
-              },
-              { 
-                id: 10, 
-                title: 'Sapiens', 
-                author: 'Yuval Noah Harari',
-                year: 2015, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-12-07',
-                rating: 8,
-                style_background: 'background: repeating-linear-gradient(90deg, #6e6e6e 0%, #cfcfcf 10%, #aaaaaa 20%, #bebebe 30%, #898989 40%,  50%, #898989 60%, #bebebe 70%, #aaaaaa 80%, #cfcfcf 90%, #6e6e6e 100%)',
-                style_height: 145,
-              },
-              { 
-                id: 11, 
-                title: 'Metro 2033', 
-                author: 'Dmitrijus Gluchovskis',
-                year: 2005, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2021-01-30',
-                rating: 8,
-                style_background: 'background: radial-gradient(circle, rgba(167,167,167,1) 0%, rgba(80,80,80,1) 60%);',
-                style_height: 142,
-              },
-              { 
-                id: 12, 
-                title: 'Будущее', 
-                author: 'Дмитрий Глуховский',
-                year: 2013, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2021-08-21',
-                rating: 8,
-                style_background: 'background: repeating-linear-gradient(90deg, #898989 0%, #dcdcdc 10%, #898989 20%, #bebebe 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #bebebe 70%, #898989 80%, #dcdcdc 90%, #898989 100%)',
-                style_height: 144,
-              },
-              { 
-                id: 13, 
-                title: 'Games People Play', 
-                author: 'Eric Berne',
-                year: 1964, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2022-11-05',
-                rating: 8,
-                style_background: 'background: repeating-linear-gradient(90deg, #dedede 0%, #aaaaaa 10%, #d1d1d1 20%, #cfcfcf 30%, #dcdcdc 40%,  50%, #dcdcdc 60%, #cfcfcf 70%, #d1d1d1 80%, #aaaaaa 90%, #dedede 100%)',
-                style_height: 140,
-              },
-              { 
-                id: 14, 
-                title: 'Древний', 
-                author: 'Сергей Тармашев',
-                year: 2008, 
-                read_books: 6,
-                total_books: 7,
-                last_read: '2022-11-05',
-                rating: 8,
-                style_background: 'background: repeating-linear-gradient(90deg, #e6e6e6 0%, #bebebe 10%, #d9d9d9 20%, #898989 30%, #dedede 40%,  50%, #dedede 60%, #898989 70%, #d9d9d9 80%, #bebebe 90%, #e6e6e6 100%)',
-                style_height: 136,
-              },
-              { 
-                id: 15, 
-                title: 'The Teachings of Don Juan', 
-                author: 'Carlos Castaneda',
-                year: 1968, 
-                read_books: 4,
-                total_books: 8,
-                last_read: '2022-12-25',
-                rating: 8,
-                style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #cfcfcf 10%, #b2b2b2 20%, #6e6e6e 30%, #dedede 40%,  50%, #dedede 60%, #6e6e6e 70%, #b2b2b2 80%, #cfcfcf 90%, #d1d1d1 100%)',
-                style_height: 136,
-              },
-              { 
-                id: 16, 
-                title: 'Nineteen Eighty-Four', 
-                author: 'George Orwell',
-                year: 1949, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2022-12-25',
-                rating: 8,
-                style_background: 'background: repeating-linear-gradient(90deg, #dcdcdc 0%, #6e6e6e 10%, #898989 20%, #bebebe 30%, #d9d9d9 40%,  50%, #d9d9d9 60%, #bebebe 70%, #898989 80%, #6e6e6e 90%, #dcdcdc 100%)',
-                style_height: 138,
-              },
-              { 
-                id: 17, 
-                title: 'Stranger in a Strange Land', 
-                author: 'Robert A. Heinlein',
-                year: 1961, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-07-22',
-                rating: 8,
-                style_background: 'background: repeating-linear-gradient(90deg, #898989 0%, #6e6e6e 10%, #bebebe 20%, #aaaaaa 30%, #dcdcdc 40%,  50%, #dcdcdc 60%, #aaaaaa 70%, #bebebe 80%, #6e6e6e 90%, #898989 100%)',
-                style_height: 145,
-              },
-              { 
-                id: 18, 
-                title: 'The Sea-Wolf', 
-                author: 'Jack London',
-                year: 1904, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-06-25',
-                rating: 8,
-                style_background: 'background: repeating-linear-gradient(90deg, #d9d9d9 0%, #bebebe 10%, #d9d9d9 20%, #aaaaaa 30%, #b2b2b2 40%,  50%, #b2b2b2 60%, #aaaaaa 70%, #d9d9d9 80%, #bebebe 90%, #d9d9d9 100%)',
-                style_height: 140,
-              },
-              { 
-                id: 19, 
-                title: 'Sidharta (Siddhartha)', 
-                author: 'Hermann Hesse',
-                year: 1922, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2023-02-09',
-                rating: 7,
-                style_background: 'background: radial-gradient(#bc8342, rgb(153, 100, 41))',
-                style_height: 139,
-              },
-              { 
-                id: 20, 
-                title: 'Путь Шамана', 
-                author: 'Василий Маханенко',
-                year: 2015, 
-                read_books: 1,
-                total_books: 7,
-                last_read: '2021-12-16',
-                rating: 7,
-                style_background: 'background: repeating-linear-gradient(90deg, #dedede 0%, #bebebe 10%, #aaaaaa 20%, #d1d1d1 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #d1d1d1 70%, #aaaaaa 80%, #bebebe 90%, #dedede 100%)',
-                style_height: 145,
-              },
-              { 
-                id: 21, 
-                title: 'The Little Prince', 
-                author: 'Antoine de Saint-Exupéry',
-                year: 2000, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-01-28',
-                rating: 7,
-                style_background: 'background: repeating-linear-gradient(90deg, #898989 0%, #d9d9d9 10%, #aaaaaa 20%, #dcdcdc 30%, #e6e6e6 40%,  50%, #e6e6e6 60%, #dcdcdc 70%, #aaaaaa 80%, #d9d9d9 90%, #898989 100%)',
-                style_height: 133,
-              },
-
-              { 
-                id: 22, 
-                title: 'Shantaram', 
-                author: 'Gregory David Roberts',
-                year: 2003, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-01-28',
-                rating: 7,
-                style_background: 'background: repeating-linear-gradient(90deg, #b2b2b2 0%, #dedede 10%, #898989 20%, #d9d9d9 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #d9d9d9 70%, #898989 80%, #dedede 90%, #b2b2b2 100%)',
-                style_height: 143,
-              },
-
-              { 
-                id: 23, 
-                title: 'Барлиона', 
-                author: 'Василий Маханенко',
-                year: 2014, 
-                read_books: 13,
-                total_books: 13,
-                last_read: '2022-12-26',
-                rating: 7,
-                style_background: 'background: repeating-linear-gradient(90deg, #bebebe 0%, #dedede 10%, #e6e6e6 20%, #dedede 30%, #6e6e6e 40%,  50%, #6e6e6e 60%, #dedede 70%, #e6e6e6 80%, #dedede 90%, #bebebe 100%)',
-                style_height: 136,
-              },
-
-              { 
-                id: 24, 
-                title: 'Rich father poor father', 
-                author: 'Robert Kiyosaki',
-                year: 2000, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-12-07',
-                rating: 7,
-                style_background: 'background: repeating-linear-gradient(90deg, #cfcfcf 0%, #6e6e6e 10%, #cfcfcf 20%, #dedede 30%, #dcdcdc 40%,  50%, #dcdcdc 60%, #dedede 70%, #cfcfcf 80%, #6e6e6e 90%, #cfcfcf 100%)',
-                style_height: 131,
-              },
-              { 
-                id: 25, 
-                title: 'Animal Farm', 
-                author: 'George Orwell',
-                year: 1945, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-06-05',
-                rating: 7,
-                style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #d9d9d9 10%, #bebebe 20%, #6e6e6e 30%, #6e6e6e 40%,  50%, #6e6e6e 60%, #6e6e6e 70%, #bebebe 80%, #d9d9d9 90%, #d1d1d1 100%)',
-                style_height: 135,
-              },
-              { 
-                id: 26, 
-                title: 'Человек на часах', 
-                author: 'Н. С. Лесков',
-                year: 1887, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-06-05',
-                rating: 7,
-                style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #898989 10%, #cfcfcf 20%, #bebebe 30%, #b2b2b2 40%,  50%, #b2b2b2 60%, #bebebe 70%, #cfcfcf 80%, #898989 90%, #d1d1d1 100%)',
-                style_height: 132,
-              },
-              { 
-                id: 27, 
-                title: 'For Whom the Bell Tolls', 
-                author: 'Ernest Hemingway',
-                year: 1940, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-01-28',
-                rating: 7,
-                style_background: 'background: repeating-linear-gradient(90deg, #dcdcdc 0%, #6e6e6e 10%, #dcdcdc 20%, #d9d9d9 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #d9d9d9 70%, #dcdcdc 80%, #6e6e6e 90%, #dcdcdc 100%)',
-                style_height: 143,
-              },
-              { 
-                id: 28, 
-                title: 'The Catcher in the Rye', 
-                author: 'Jerome D. Salinger',
-                year: 1951, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-06-04',
-                rating: 6,
-                style_background: 'background: repeating-linear-gradient(90deg, #898989 0%, #e6e6e6 10%, #bebebe 20%, #aaaaaa 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #aaaaaa 70%, #bebebe 80%, #e6e6e6 90%, #898989 100%)',
-                style_height: 138,
-              },
-              { 
-                id: 29, 
-                title: 'Tales of Power', 
-                author: 'Carlos Castaneda',
-                year: 1974, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2022-12-25',
-                rating: 6,
-                style_background: 'background: repeating-linear-gradient(90deg, #aaaaaa 0%, #6e6e6e 10%, #6e6e6e 20%, #e6e6e6 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #e6e6e6 70%, #6e6e6e 80%, #6e6e6e 90%, #aaaaaa 100%)',
-                style_height: 145,
-              },
-              { 
-                id: 30, 
-                title: 'On the Road', 
-                author: 'Jack Kerouac',
-                year: 1957, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-01-28',
-                rating: 6,
-                style_background: 'background: repeating-linear-gradient(90deg, #cfcfcf 0%, #dedede 10%, #aaaaaa 20%, #898989 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #898989 70%, #aaaaaa 80%, #dedede 90%, #cfcfcf 100%)',
-                style_height: 141,
-              },
-              { 
-                id: 31, 
-                title: 'Vremena goda', 
-                author: 'Анна Борисова',
-                year: 2011, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-06-25',
-                rating: 6,
-                style_background: 'background: repeating-linear-gradient(90deg, #bebebe 0%, #b2b2b2 10%, #d1d1d1 20%, #aaaaaa 30%, #898989 40%,  50%, #898989 60%, #aaaaaa 70%, #d1d1d1 80%, #b2b2b2 90%, #bebebe 100%)',
-                style_height: 131,
-              },
-              { 
-                id: 32, 
-                title: ' Crime And Punishment', 
-                author: 'Fyodor Dostoevsky',
-                year: 2011, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-05-25',
-                rating: 6,
-                style_background: 'background: repeating-linear-gradient(90deg, #aaaaaa 0%, #898989 10%, #e6e6e6 20%, #e6e6e6 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #e6e6e6 70%, #e6e6e6 80%, #898989 90%, #aaaaaa 100%)',
-                style_height: 133,
-              },
-              { 
-                id: 33, 
-                title: 'One Hundred Years of Solitude', 
-                author: 'Gabriel Garcia Marquez',
-                year: 1967, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-07-22',
-                rating: 5,
-                style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #aaaaaa 10%, #e6e6e6 20%, #cfcfcf 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #cfcfcf 70%, #e6e6e6 80%, #aaaaaa 90%, #d1d1d1 100%)',
-                style_height: 131,
-              },
-              { 
-                id: 34, 
-                title: 'Трое в лодке не считая собаки', 
-                author: 'Jerome K. Jerome',
-                year: 1979, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-01-28',
-                rating: 6,
-                style_background: 'background: repeating-linear-gradient(90deg, #6e6e6e 0%, #cfcfcf 10%, #bebebe 20%, #b2b2b2 30%, #b2b2b2 40%,  50%, #b2b2b2 60%, #b2b2b2 70%, #bebebe 80%, #cfcfcf 90%, #6e6e6e 100%)',
-                style_height: 140,
-              },
-              { 
-                id: 35, 
-                title: 'Детство тёмы', 
-                author: 'Николая Гарина-Михайловского',
-                year: 1892, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-07-01',
-                rating: 5,
-                style_background: 'background: repeating-linear-gradient(90deg, #e6e6e6 0%, #dedede 10%, #bebebe 20%, #6e6e6e 30%, #e6e6e6 40%,  50%, #e6e6e6 60%, #6e6e6e 70%, #bebebe 80%, #dedede 90%, #e6e6e6 100%)',
-                style_height: 140,
-              },
-              { 
-                id: 36, 
-                title: 'War and Peace', 
-                author: 'Leo Tolstoy',
-                year: 1892, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2020-01-28',
-                rating: 4,
-                style_background: 'background: repeating-linear-gradient(90deg, #dedede 0%, #898989 10%, #6e6e6e 20%, #bebebe 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #bebebe 70%, #6e6e6e 80%, #898989 90%, #dedede 100%)',
-                style_height: 136,
-              },
-              { 
-                id: 37, 
-                title: 'Man\'s Search for Meaning', 
-                author: 'Viktor E. Frankl',
-                year: 1947, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2023-03-05',
-                rating: 7,
-                style_background: 'background: radial-gradient(circle, rgba(92,55,73,1) 0%, rgba(208,191,167,1) 66%);',
-                style_height: 135,
-              },
-              { 
-                id: 38, 
-                title: 'Tuesdays with Morrie', 
-                author: 'Mitch Albom',
-                year: 1997, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2023-04-15',
-                rating: 7,
-                style_background: 'background: repeating-linear-gradient(90deg, #b2b2b2 0%, #d1d1d1 10%, #dedede 20%, #898989 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #898989 70%, #dedede 80%, #d1d1d1 90%, #b2b2b2 100%)',
-                style_height: 132,
-              },
-              { 
-                id: 39, 
-                title: 'Дерсу Узала', 
-                author: 'Vladimir Arsenyev',
-                year: 1923, 
-                read_books: 1,
-                total_books: 1,
-                last_read: '2021-02-01',
-                rating: 8,
-                style_background: 'background: rgb(93,74,16); background: linear-gradient(68deg, rgba(93,74,16,1) 0%, rgba(10,92,54,1) 66%);',
-                style_height: 138,
-              }
-
-
-              
-
-
-
-              
-            ]
-          };
-        },
-        mounted:function(){
-              this.sortRating()
-        },
-        methods: {
-          sortTitle() {
-            this.books.sort((a, b) => {
-              return a.title.localeCompare(b.title);
-            });
-          },
-          sortRating() {
-
-            function compare(a, b) {
-              if (a.rating < b.rating)
-                return 1;
-              if (a.rating > b.rating)
-                return -1;
-              return 0;
-            }
-
-            return this.books.sort(compare);
-
-          }
-        }
-      });
-      
-      app.mount('#app');
-    </script>
-
-
-
-
-
-
+  </div>
+  <div id="latest">
+    <div v-for="book in books" class="book_read_b clearfix" :key="book.id" :id="'bl_r_' + book.id">
+      <div class="w5l book_read_time">{{ book.last_read }}</div>
+      <div class="w5r">{{ book.title }}</div>
     </div>
   </div>
+</div>
+
+<script>
+  const app = Vue.createApp({
+    data() {
+      return {
+        books: [
+          { 
+            id: 1, 
+            title: 'Искажающие Реальность', 
+            author: 'Михаил Атаманов',
+            year: 2017, 
+            read_books: 10,
+            total_books: 10,
+            last_read: '2021-09-28',
+            rating: 10,
+            style_background: 'background: repeating-linear-gradient(90deg, #6e6e6e 0%, #b2b2b2 10%, #6e6e6e 20%, #dcdcdc 30%, #898989 40%,  50%, #898989 60%, #dcdcdc 70%, #6e6e6e 80%, #b2b2b2 90%, #6e6e6e 100%)',
+            style_height: 139,
+
+          },
+          { 
+            id: 2, 
+            title: 'На западном фронте без перемен', 
+            author: 'Erichas Marija Remarkas',
+            year: 1928, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2021-09-27',
+            rating: 8,
+            style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #b2b2b2 10%, #b2b2b2 20%, #e6e6e6 30%, #d9d9d9 40%,  50%, #d9d9d9 60%, #e6e6e6 70%, #b2b2b2 80%, #b2b2b2 90%, #d1d1d1 100%)',
+            style_height: 133,
+          },
+          { 
+            id: 3, 
+            title: 'Yellow Line', 
+            author: 'Mikhail Tyrin',
+            year: 2003, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-08-08',
+            rating: 9,
+            style_background: 'background: linear-gradient(180deg, rgba(233,233,233,1) 0%, rgba(230,230,230,1) 43%, rgba(248,255,80,1) 48%, rgba(241,241,241,1) 52%, rgba(223,223,223,1) 100%);',
+            style_height: 134,
+          },
+          { 
+            id: 4, 
+            title: 'White fang', 
+            author: 'Jack London',
+            year: 1906, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-05-25',
+            rating: 9,
+            style_background: 'background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(158, 158, 158, 1) 20%, rgba(58, 58, 58, 1) 60%);',
+            style_height: 144,
+          },
+          { 
+            id: 5, 
+            title: 'Теория каст и ролей', 
+            author: 'Алексей Крол',
+            year: 2018, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2023-01-13',
+            rating: 9,
+            style_background: 'background: repeating-linear-gradient(90deg, #cfcfcf 0%, #898989 10%, #bebebe 20%, #dedede 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #dedede 70%, #bebebe 80%, #898989 90%, #cfcfcf 100%)',
+            style_height: 142,
+          },
+          { 
+            id: 6, 
+            title: 'The Alchemist', 
+            author: 'Paulo Coelho',
+            year: 1988, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-01-28',
+            rating: 8,
+            style_background: 'background: repeating-linear-gradient(90deg, #bebebe 0%, #e6e6e6 10%, #6e6e6e 20%, #dcdcdc 30%, #898989 40%,  50%, #898989 60%, #dcdcdc 70%, #6e6e6e 80%, #e6e6e6 90%, #bebebe 100%)',
+            style_height: 135,
+          },
+          { 
+            id: 7, 
+            title: 'Nineteen eighty four movie', 
+            author: 'George Orwell',
+            year: 1949, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-08-13',
+            rating: 8,
+            style_background: 'background: repeating-linear-gradient(90deg, #e6e6e6 0%, #aaaaaa 10%, #e6e6e6 20%, #d9d9d9 30%, #dedede 40%,  50%, #dedede 60%, #d9d9d9 70%, #e6e6e6 80%, #aaaaaa 90%, #e6e6e6 100%)',
+            style_height: 130,
+          },
+          { 
+            id: 8, 
+            title: 'Национализация рубля. Путь к свободе России', 
+            author: 'Nikolaj Starikov',
+            year: 2013, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-08-13',
+            rating: 8,
+            style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #898989 10%, #dedede 20%, #bebebe 30%, #dedede 40%,  50%, #dedede 60%, #bebebe 70%, #dedede 80%, #898989 90%, #d1d1d1 100%)',
+            style_height: 142,
+          },
+          { 
+            id: 9, 
+            title: 'The Count of Monte Cristo', 
+            author: 'Aleksandras Diuma',
+            year: 1844, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-10-15',
+            rating: 8,
+            style_background: 'background: repeating-linear-gradient(90deg, #bebebe 0%, #cfcfcf 10%, #e6e6e6 20%, #6e6e6e 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #6e6e6e 70%, #e6e6e6 80%, #cfcfcf 90%, #bebebe 100%)',
+            style_height: 135,
+          },
+          { 
+            id: 10, 
+            title: 'Sapiens', 
+            author: 'Yuval Noah Harari',
+            year: 2015, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-12-07',
+            rating: 8,
+            style_background: 'background: repeating-linear-gradient(90deg, #6e6e6e 0%, #cfcfcf 10%, #aaaaaa 20%, #bebebe 30%, #898989 40%,  50%, #898989 60%, #bebebe 70%, #aaaaaa 80%, #cfcfcf 90%, #6e6e6e 100%)',
+            style_height: 145,
+          },
+          { 
+            id: 11, 
+            title: 'Metro 2033', 
+            author: 'Dmitrijus Gluchovskis',
+            year: 2005, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2021-01-30',
+            rating: 8,
+            style_background: 'background: radial-gradient(circle, rgba(167,167,167,1) 0%, rgba(80,80,80,1) 60%);',
+            style_height: 142,
+          },
+          { 
+            id: 12, 
+            title: 'Будущее', 
+            author: 'Дмитрий Глуховский',
+            year: 2013, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2021-08-21',
+            rating: 8,
+            style_background: 'background: repeating-linear-gradient(90deg, #898989 0%, #dcdcdc 10%, #898989 20%, #bebebe 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #bebebe 70%, #898989 80%, #dcdcdc 90%, #898989 100%)',
+            style_height: 144,
+          },
+          { 
+            id: 13, 
+            title: 'Games People Play', 
+            author: 'Eric Berne',
+            year: 1964, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2022-11-05',
+            rating: 8,
+            style_background: 'background: repeating-linear-gradient(90deg, #dedede 0%, #aaaaaa 10%, #d1d1d1 20%, #cfcfcf 30%, #dcdcdc 40%,  50%, #dcdcdc 60%, #cfcfcf 70%, #d1d1d1 80%, #aaaaaa 90%, #dedede 100%)',
+            style_height: 140,
+          },
+          { 
+            id: 14, 
+            title: 'Древний', 
+            author: 'Сергей Тармашев',
+            year: 2008, 
+            read_books: 6,
+            total_books: 7,
+            last_read: '2022-11-05',
+            rating: 8,
+            style_background: 'background: repeating-linear-gradient(90deg, #e6e6e6 0%, #bebebe 10%, #d9d9d9 20%, #898989 30%, #dedede 40%,  50%, #dedede 60%, #898989 70%, #d9d9d9 80%, #bebebe 90%, #e6e6e6 100%)',
+            style_height: 136,
+          },
+          { 
+            id: 15, 
+            title: 'The Teachings of Don Juan', 
+            author: 'Carlos Castaneda',
+            year: 1968, 
+            read_books: 4,
+            total_books: 8,
+            last_read: '2022-12-25',
+            rating: 8,
+            style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #cfcfcf 10%, #b2b2b2 20%, #6e6e6e 30%, #dedede 40%,  50%, #dedede 60%, #6e6e6e 70%, #b2b2b2 80%, #cfcfcf 90%, #d1d1d1 100%)',
+            style_height: 136,
+          },
+          { 
+            id: 16, 
+            title: 'Nineteen Eighty-Four', 
+            author: 'George Orwell',
+            year: 1949, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2022-12-25',
+            rating: 8,
+            style_background: 'background: repeating-linear-gradient(90deg, #dcdcdc 0%, #6e6e6e 10%, #898989 20%, #bebebe 30%, #d9d9d9 40%,  50%, #d9d9d9 60%, #bebebe 70%, #898989 80%, #6e6e6e 90%, #dcdcdc 100%)',
+            style_height: 138,
+          },
+          { 
+            id: 17, 
+            title: 'Stranger in a Strange Land', 
+            author: 'Robert A. Heinlein',
+            year: 1961, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-07-22',
+            rating: 8,
+            style_background: 'background: repeating-linear-gradient(90deg, #898989 0%, #6e6e6e 10%, #bebebe 20%, #aaaaaa 30%, #dcdcdc 40%,  50%, #dcdcdc 60%, #aaaaaa 70%, #bebebe 80%, #6e6e6e 90%, #898989 100%)',
+            style_height: 145,
+          },
+          { 
+            id: 18, 
+            title: 'The Sea-Wolf', 
+            author: 'Jack London',
+            year: 1904, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-06-25',
+            rating: 8,
+            style_background: 'background: repeating-linear-gradient(90deg, #d9d9d9 0%, #bebebe 10%, #d9d9d9 20%, #aaaaaa 30%, #b2b2b2 40%,  50%, #b2b2b2 60%, #aaaaaa 70%, #d9d9d9 80%, #bebebe 90%, #d9d9d9 100%)',
+            style_height: 140,
+          },
+          { 
+            id: 19, 
+            title: 'Sidharta (Siddhartha)', 
+            author: 'Hermann Hesse',
+            year: 1922, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2023-02-09',
+            rating: 7,
+            style_background: 'background: radial-gradient(#bc8342, rgb(153, 100, 41))',
+            style_height: 139,
+          },
+          { 
+            id: 20, 
+            title: 'Путь Шамана', 
+            author: 'Василий Маханенко',
+            year: 2015, 
+            read_books: 1,
+            total_books: 7,
+            last_read: '2021-12-16',
+            rating: 7,
+            style_background: 'background: repeating-linear-gradient(90deg, #dedede 0%, #bebebe 10%, #aaaaaa 20%, #d1d1d1 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #d1d1d1 70%, #aaaaaa 80%, #bebebe 90%, #dedede 100%)',
+            style_height: 145,
+          },
+          { 
+            id: 21, 
+            title: 'The Little Prince', 
+            author: 'Antoine de Saint-Exupéry',
+            year: 2000, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-01-28',
+            rating: 7,
+            style_background: 'background: repeating-linear-gradient(90deg, #898989 0%, #d9d9d9 10%, #aaaaaa 20%, #dcdcdc 30%, #e6e6e6 40%,  50%, #e6e6e6 60%, #dcdcdc 70%, #aaaaaa 80%, #d9d9d9 90%, #898989 100%)',
+            style_height: 133,
+          },
+
+          { 
+            id: 22, 
+            title: 'Shantaram', 
+            author: 'Gregory David Roberts',
+            year: 2003, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-01-28',
+            rating: 7,
+            style_background: 'background: repeating-linear-gradient(90deg, #b2b2b2 0%, #dedede 10%, #898989 20%, #d9d9d9 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #d9d9d9 70%, #898989 80%, #dedede 90%, #b2b2b2 100%)',
+            style_height: 143,
+          },
+
+          { 
+            id: 23, 
+            title: 'Барлиона', 
+            author: 'Василий Маханенко',
+            year: 2014, 
+            read_books: 13,
+            total_books: 13,
+            last_read: '2022-12-26',
+            rating: 7,
+            style_background: 'background: repeating-linear-gradient(90deg, #bebebe 0%, #dedede 10%, #e6e6e6 20%, #dedede 30%, #6e6e6e 40%,  50%, #6e6e6e 60%, #dedede 70%, #e6e6e6 80%, #dedede 90%, #bebebe 100%)',
+            style_height: 136,
+          },
+
+          { 
+            id: 24, 
+            title: 'Rich father poor father', 
+            author: 'Robert Kiyosaki',
+            year: 2000, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-12-07',
+            rating: 7,
+            style_background: 'background: repeating-linear-gradient(90deg, #cfcfcf 0%, #6e6e6e 10%, #cfcfcf 20%, #dedede 30%, #dcdcdc 40%,  50%, #dcdcdc 60%, #dedede 70%, #cfcfcf 80%, #6e6e6e 90%, #cfcfcf 100%)',
+            style_height: 131,
+          },
+          { 
+            id: 25, 
+            title: 'Animal Farm', 
+            author: 'George Orwell',
+            year: 1945, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-06-05',
+            rating: 7,
+            style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #d9d9d9 10%, #bebebe 20%, #6e6e6e 30%, #6e6e6e 40%,  50%, #6e6e6e 60%, #6e6e6e 70%, #bebebe 80%, #d9d9d9 90%, #d1d1d1 100%)',
+            style_height: 135,
+          },
+          { 
+            id: 26, 
+            title: 'Человек на часах', 
+            author: 'Н. С. Лесков',
+            year: 1887, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-06-05',
+            rating: 7,
+            style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #898989 10%, #cfcfcf 20%, #bebebe 30%, #b2b2b2 40%,  50%, #b2b2b2 60%, #bebebe 70%, #cfcfcf 80%, #898989 90%, #d1d1d1 100%)',
+            style_height: 132,
+          },
+          { 
+            id: 27, 
+            title: 'For Whom the Bell Tolls', 
+            author: 'Ernest Hemingway',
+            year: 1940, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-01-28',
+            rating: 7,
+            style_background: 'background: repeating-linear-gradient(90deg, #dcdcdc 0%, #6e6e6e 10%, #dcdcdc 20%, #d9d9d9 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #d9d9d9 70%, #dcdcdc 80%, #6e6e6e 90%, #dcdcdc 100%)',
+            style_height: 143,
+          },
+          { 
+            id: 28, 
+            title: 'The Catcher in the Rye', 
+            author: 'Jerome D. Salinger',
+            year: 1951, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-06-04',
+            rating: 6,
+            style_background: 'background: repeating-linear-gradient(90deg, #898989 0%, #e6e6e6 10%, #bebebe 20%, #aaaaaa 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #aaaaaa 70%, #bebebe 80%, #e6e6e6 90%, #898989 100%)',
+            style_height: 138,
+          },
+          { 
+            id: 29, 
+            title: 'Tales of Power', 
+            author: 'Carlos Castaneda',
+            year: 1974, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2022-12-25',
+            rating: 6,
+            style_background: 'background: repeating-linear-gradient(90deg, #aaaaaa 0%, #6e6e6e 10%, #6e6e6e 20%, #e6e6e6 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #e6e6e6 70%, #6e6e6e 80%, #6e6e6e 90%, #aaaaaa 100%)',
+            style_height: 145,
+          },
+          { 
+            id: 30, 
+            title: 'On the Road', 
+            author: 'Jack Kerouac',
+            year: 1957, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-01-28',
+            rating: 6,
+            style_background: 'background: repeating-linear-gradient(90deg, #cfcfcf 0%, #dedede 10%, #aaaaaa 20%, #898989 30%, #d1d1d1 40%,  50%, #d1d1d1 60%, #898989 70%, #aaaaaa 80%, #dedede 90%, #cfcfcf 100%)',
+            style_height: 141,
+          },
+          { 
+            id: 31, 
+            title: 'Vremena goda', 
+            author: 'Анна Борисова',
+            year: 2011, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-06-25',
+            rating: 6,
+            style_background: 'background: repeating-linear-gradient(90deg, #bebebe 0%, #b2b2b2 10%, #d1d1d1 20%, #aaaaaa 30%, #898989 40%,  50%, #898989 60%, #aaaaaa 70%, #d1d1d1 80%, #b2b2b2 90%, #bebebe 100%)',
+            style_height: 131,
+          },
+          { 
+            id: 32, 
+            title: ' Crime And Punishment', 
+            author: 'Fyodor Dostoevsky',
+            year: 2011, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-05-25',
+            rating: 6,
+            style_background: 'background: repeating-linear-gradient(90deg, #aaaaaa 0%, #898989 10%, #e6e6e6 20%, #e6e6e6 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #e6e6e6 70%, #e6e6e6 80%, #898989 90%, #aaaaaa 100%)',
+            style_height: 133,
+          },
+          { 
+            id: 33, 
+            title: 'One Hundred Years of Solitude', 
+            author: 'Gabriel Garcia Marquez',
+            year: 1967, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-07-22',
+            rating: 5,
+            style_background: 'background: repeating-linear-gradient(90deg, #d1d1d1 0%, #aaaaaa 10%, #e6e6e6 20%, #cfcfcf 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #cfcfcf 70%, #e6e6e6 80%, #aaaaaa 90%, #d1d1d1 100%)',
+            style_height: 131,
+          },
+          { 
+            id: 34, 
+            title: 'Трое в лодке не считая собаки', 
+            author: 'Jerome K. Jerome',
+            year: 1979, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-01-28',
+            rating: 6,
+            style_background: 'background: repeating-linear-gradient(90deg, #6e6e6e 0%, #cfcfcf 10%, #bebebe 20%, #b2b2b2 30%, #b2b2b2 40%,  50%, #b2b2b2 60%, #b2b2b2 70%, #bebebe 80%, #cfcfcf 90%, #6e6e6e 100%)',
+            style_height: 140,
+          },
+          { 
+            id: 35, 
+            title: 'Детство тёмы', 
+            author: 'Николая Гарина-Михайловского',
+            year: 1892, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-07-01',
+            rating: 5,
+            style_background: 'background: repeating-linear-gradient(90deg, #e6e6e6 0%, #dedede 10%, #bebebe 20%, #6e6e6e 30%, #e6e6e6 40%,  50%, #e6e6e6 60%, #6e6e6e 70%, #bebebe 80%, #dedede 90%, #e6e6e6 100%)',
+            style_height: 140,
+          },
+          { 
+            id: 36, 
+            title: 'War and Peace', 
+            author: 'Leo Tolstoy',
+            year: 1892, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2020-01-28',
+            rating: 4,
+            style_background: 'background: repeating-linear-gradient(90deg, #dedede 0%, #898989 10%, #6e6e6e 20%, #bebebe 30%, #cfcfcf 40%,  50%, #cfcfcf 60%, #bebebe 70%, #6e6e6e 80%, #898989 90%, #dedede 100%)',
+            style_height: 136,
+          },
+          { 
+            id: 37, 
+            title: 'Man\'s Search for Meaning', 
+            author: 'Viktor E. Frankl',
+            year: 1947, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2023-03-05',
+            rating: 7,
+            style_background: 'background: radial-gradient(circle, rgba(92,55,73,1) 0%, rgba(208,191,167,1) 66%);',
+            style_height: 135,
+          },
+          { 
+            id: 38, 
+            title: 'Tuesdays with Morrie', 
+            author: 'Mitch Albom',
+            year: 1997, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2023-04-15',
+            rating: 7,
+            style_background: 'background: repeating-linear-gradient(90deg, #b2b2b2 0%, #d1d1d1 10%, #dedede 20%, #898989 30%, #aaaaaa 40%,  50%, #aaaaaa 60%, #898989 70%, #dedede 80%, #d1d1d1 90%, #b2b2b2 100%)',
+            style_height: 132,
+          },
+          { 
+            id: 39, 
+            title: 'Дерсу Узала', 
+            author: 'Vladimir Arsenyev',
+            year: 1923, 
+            read_books: 1,
+            total_books: 1,
+            last_read: '2019-02-01',
+            rating: 8,
+            style_background: 'background: rgb(93,74,16); background: linear-gradient(68deg, rgba(93,74,16,1) 0%, rgba(10,92,54,1) 66%);',
+            style_height: 138,
+          }
+
+
+          
+
+
+
+          
+        ]
+      };
+    },
+    computed: {
+      sortedBooks() {
+        return this.books.sort((a, b) => new Date(b.last_read) - new Date(a.last_read));
+      }
+    },
+    mounted: function(){
+          this.sortRating()
+    },
+    methods: {
+      sortTitle() {
+        this.books.sort((a, b) => {
+          return a.title.localeCompare(b.title);
+        });
+      },
+      sortLastread() {
+        return this.books.sort((a, b) => new Date(b.last_read) - new Date(a.last_read));
+      },
+      sortRating() {
+
+        function compare(a, b) {
+          if (a.rating < b.rating)
+            return 1;
+          if (a.rating > b.rating)
+            return -1;
+          return 0;
+        }
+
+        return this.books.sort(compare);
+
+      }
+    }
+  });
+  
+  app.mount('#app');
+</script>
+
+
+
+
+
+
 
 
 

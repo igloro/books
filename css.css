@@ -38,6 +38,22 @@ footer.footer a
     clear: both;
 }
 
+
+.w5l 
+{
+    float: left;
+    width: 40%;
+    text-align: right;
+    margin-right: 1%;
+}
+
+.w5r
+{
+    float: left;
+    width:  59%;
+    text-align: left;
+}
+
 h3
 {
     margin-top: 5px;
@@ -339,6 +355,19 @@ h3
 	width: 100px;
     padding-right: 100px;
 	transition: width 3s;
+}
+
+#latest
+{
+    text-align: center;
+    margin-top:  20px;
+    font-size: 11px;
+    color: #b97c3b;
+}
+
+.book_read_time
+{
+    color: #704c26;
 }
 
 .container
